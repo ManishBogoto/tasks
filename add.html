@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" />
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+  <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+    rel="stylesheet">
+  <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+  <title>Add Book</title>
+  <style>
+    .container {
+      max-width: 700px;
+      margin: 80px auto;
+      padding: 50px;
+      box-shadow: 0px 0px 8px 1px #c1c1c1;
+      border-radius: 8px;
+      position: relative;
+    }
+
+    .dropdown {
+      display: block !important;
+      width: 100% !important;
+    }
+
+    .btn-light {
+      color: #212529;
+      background-color: white;
+      border-color: #ced4da;
+    }
+
+    .custom-control {
+      display: inline-block !important;
+    }
+
+    .toggle-off {
+      white-space: nowrap;
+    }
+
+    .form-group {
+      margin-bottom: 1.3rem;
+    }
+
+    .custom-control {
+      margin-right: 15px;
+    }
+
+    .header {
+      position: absolute;
+      width: 100%;
+      height: 70px;
+      background-color: #007bff !important;
+      top: 0;
+      left: 0;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+
+    .main {
+      padding-top: 50px;
+    }
+
+    .header h1 {
+      text-align: center;
+      color: white;
+      padding: 10px 0px;
+    }
+
+    .btn-success:not(:disabled):not(.disabled).active,
+    .btn-success:not(:disabled):not(.disabled):active,
+    .show>.btn-success.dropdown-toggle {
+      color: #fff;
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+
+    .btn-info,
+    .btn-success,
+    .btn-success:hover {
+      color: #fff;
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+
+    .center-align {
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Add Book</h1>
+    </div>
+    <div class="main">
+      <form name="form" action="./form.html" onsubmit="return validateForm()">
+        <div class="form-group">
+          <label for="bookName">Book Name</label>
+          <input type="text" class="form-control" id="bookName" placeholder="Enter Book Name" />
+        </div>
+        <div class="form-group">
+          <label for="authorEmail">Author Email</label>
+          <input type="text" class="form-control" id="authorEmail" placeholder="Enter Author Email" />
+        </div>
+        <div class="form-group">
+          <label for="website">Website</label>
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">https://www.</span>
+            </div>
+            <input type="text" class="form-control" id="website" placeholder=" Enter Website" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label style="display: block" class="my-1 mr-2" for="inlineFormCustomSelectPref">Cover Picture</label><br>
+          <input type="file" name="cover_picture">
+        </div>
+        <div class="form-group">
+          <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Categories (Multi-select Dropdown)</label>
+          <select class="selectpicker" name="categories" multiple data-live-search="true">
+            <option>Romance</option>
+            <option>Suspense </option>
+            <option>Thriller</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Date Of Publication</label>
+          <input id="datepicker" width="100%" />
+        </div>
+        <div class="form-group"></div>
+        <div class="form-row">
+          <div class="col">
+            <div class="form-group">
+              <label for="isbn">ISBN Number</label>
+              <input type="text" class="form-control" id="isbn" placeholder="Enter ISBN Number" />
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="website">Price</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">&#8377</span>
+                </div>
+                <input type="text" class="form-control" id="price" aria-label="Amount (to the nearest dollar)" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="my-1 mr-2" for="selectType">Type</label>
+          <select class="custom-select my-1 mr-sm-2" name="type">
+            <option selected>Choose...</option>
+            <option value="2">Magazine</option>
+            <option value="1">Novel</option>
+            <option value="3">Textbook</option>
+          </select>
+        </div>
+        <div class="form-group ">
+          <label style="display: block" class="my-1 mr-2" for="inlineFormCustomSelectPref">Format</label>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="format[]" value="paperback" class="custom-control-input" id="customCheck1">
+            <label class="custom-control-label" for="customCheck1">Paperback</label>
+          </div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="format[]" value="hardback" class="custom-control-input" id="customCheck2">
+            <label class="custom-control-label" for="customCheck2">Hardback</label>
+          </div>
+          <div class="custom-control custom-checkbox">
+            <input type="checkbox" name="format[]" value="ebook" class="custom-control-input" id="customCheck3">
+            <label class="custom-control-label" for="customCheck3">ebook</label>
+          </div>
+        </div>
+        <div class="form-group ">
+          <label style="display: block" class="my-1 mr-2" for="inlineFormCustomSelectPref">In Stock</label>
+          <input type="checkbox" checked data-toggle="toggle" data-on="Available" data-off="Out Of Stock"
+            data-onstyle="success" data-offstyle="danger" data-height="30" id="stock">
+        </div>
+        <div class="form-group">
+          <label style="display: block" class="my-1 mr-2" for="inlineFormCustomSelectPref">Rating</label>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline1" name="rating" value="1" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline1">1</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline2" name="rating" value="2" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline2">2</label>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline3" name="rating" value="3" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline3">3</labl>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline4" name="rating" value="4" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline4">4</labl>
+          </div>
+          <div class="custom-control custom-radio custom-control-inline">
+            <input type="radio" id="customRadioInline5" name="rating" value="5" class="custom-control-input">
+            <label class="custom-control-label" for="customRadioInline5">5</labl>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="comment">Review</label>
+          <textarea class="form-control" rows="5" id="comment"></textarea>
+        </div>
+        <div class="form-group">
+          <div class="center-align">
+            <button type="submit" class="btn btn-primary">Preview</button>
+            <button type="button" class="btn btn-danger">Cancel</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+  <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+  <script>
+    $('#datepicker').datepicker({
+      uiLibrary: 'bootstrap4'
+    });
+
+    function validateForm() {
+      let format = [];
+      let valid_extensions = ["jpg", "png"];
+      let bookName = document.forms["form"]["bookName"].value;
+      let authorEmail = document.forms["form"]["authorEmail"].value;
+      let website = document.forms["form"]["website"].value;
+      let datepicker = document.forms["form"]["datepicker"].value;
+      let checkboxes = document.getElementsByName("format[]");
+      let categories = document.forms["form"]["categories"].value;
+      let type = document.forms["form"]["type"].value;
+      let rating = document.forms["form"]["rating"].value;
+      let isbn = document.forms["form"]["isbn"].value;
+      let cover_picture = document.forms["form"]["cover_picture"].value;
+      let price = document.forms["form"]["price"].value;
+      let stock = document.forms["form"]["stock"].value;
+      let comment = document.forms["form"]["comment"].value;
+
+      localStorage.setItem("bookName", bookName);
+      localStorage.setItem("authorEmail", authorEmail);
+
+      if (bookName == "" || bookName == null) {
+        alert("Book name must be filled out");
+        document.form.bookName.focus();
+        return false;
+      }
+      if (authorEmail == "" || authorEmail == null) {
+        alert("Author Email Id is required")
+        document.form.authorEmail.focus();
+        return false;
+      }
+      if (website == "" || website == null) {
+        alert("website url is required")
+        document.form.website.focus();
+        return false;
+      }
+      if (datepicker == "" || datepicker == null) {
+        alert("Date of publication is required");
+        document.form.datepicker.focus();
+        return false;
+      }
+      if (isbn == "" || isbn == null) {
+        alert("ISBN number field must be not empty")
+        document.form.isbn.focus();
+        return false;
+      }
+      for (var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+          format.push(checkboxes[i].value);
+        }
+      }
+
+      if (type == "Choose...") {
+        alert("Please select type");
+        document.form.type.focus();
+        return false;
+      } 
+
+      if (categories == "") {
+        alert("Please select the category");
+        document.form.type.focus();
+        return false;
+      } 
+
+      if (rating == "") {
+        alert("Please give the rating");
+        return false;
+      }
+
+      if (price == "" || price == null) {
+        alert("Price field must be filled out");
+        document.form.price.focus();
+        return false;
+      }
+      if (comment == "" || comment == null) {
+        alert("Review section must be filled")
+        document.form.comment.focus();
+        return false;
+      }
+      if (cover_picture == "" || cover_picture == null) {
+        alert("Cover picture is not selcted...");
+        return false;
+      }
+      if (cover_picture != "" || cover_picture != null) {
+        let indexOfDot = cover_picture.lastIndexOf('.') + 1;
+        let img_extension = cover_picture.substring(indexOfDot);
+        let result = valid_extensions.includes(img_extension);
+
+        if (result == false) {
+          alert("Selected file should be of png or jpg format");
+          return false;
+        }
+        let img_size = parseFloat(cover_picture.files[0].size / (1024 * 1024).toFixed(2));
+        if (img_size > 2) {
+          alert("Selected picture size should be limited to 2MB");
+          return false;
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>
